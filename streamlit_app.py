@@ -12,8 +12,13 @@ from snowflake.snowpark.functions import col
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON')
-st.dataframe(data=my_dataframe, use_container_width=True)
-ST.STOP()
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#ST.STOP()
+
+#Convert the snowpark dataframe to pandas dataframe so we can use the LOC function
+pd_dt=my_dataframe.to_pandas()
+st.dataframe(pd_dt)
+st.stop()
 
 ingredients_list = st.multiselect('Choose up to 5 ingredients:', my_dataframe)
 
