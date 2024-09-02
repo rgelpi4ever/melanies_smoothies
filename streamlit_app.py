@@ -7,7 +7,7 @@ from snowflake.snowpark.functions import col
 st.title(":cup_with_straw: Customize Your Smoothie:cup_with_straw:")
 st.write(
     """Choose the fruits in your custom Snoothie!
-    """
+    """ 
 )
 
 name_on_order = st.text_input("Name on Smoothie:")
@@ -42,12 +42,20 @@ if ingredients_list:
             fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
         
         st.write(ingredients_string)
-        my_insert_stmt = """ insert into smoothies.public.orders(ingredients)
-        values ('""" + ingredients_string + """')"""
-        st.write(my_insert_stmt)
-        time_to_insert = st.button('Submit Order')
+        #my_insert_stmt = """ insert into smoothies.public.orders(ingredients)
+        #values ('""" + ingredients_string + """')"""
+        #st.write(my_insert_stmt)
+        #time_to_insert = st.button('Submit Order')
         #st.stop()
+    time_to_insert:
+        #    if ingredients_string:
+    message_string = ''
+    message_string += 'Your Smoothie is ordered,'
+    message_string += ' '
+    message_string += name_on_order
+    message_string += '!'
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
-    st.success('Your Smoothie is ordered!', icon="✅")
+        st.success(message_string, icon ="✅")
+
 
